@@ -9,14 +9,14 @@ public class GameManager : MonoBehaviour
 {
     public float minTime;
     public float maxTime;
-    public GameObject obj;
+    public GameObject[] obj;
     public Vector3 spawn;
     public TMP_Text tmp;
     public static int Score;
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(Random.Range(minTime, maxTime));
-        Instantiate(obj, spawn, Quaternion.identity);
+        Instantiate(obj[Random.Range(0, obj.Length)], spawn, Quaternion.identity);
         StartCoroutine(Start());
     }
 
