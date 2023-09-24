@@ -259,7 +259,35 @@ public class MazeGenerator : MonoBehaviour
     {
         if (_nodes.Count <= 0) return;
 
-        MazeNode exit = transform.GetChild(mazeSize.x * mazeSize.y - Random.Range(1, mazeSize.x-2)).GetComponent<MazeNode>();
-        exit.RemoveWall(0);
+        int spawnIndex = 0;
+        MazeNode exit;
+        switch (Random.Range(0,4))
+        {
+            case 0:
+                // bottom row
+                spawnIndex = mazeSize.x * mazeSize.y - Random.Range(1, mazeSize.x - 2);
+                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit.RemoveWall(0);
+                break;
+            case 1:
+                // top row
+                spawnIndex = Random.Range(1, mazeSize.x-2);
+                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit.RemoveWall(1);
+                break;
+            case 2:
+                // left row
+                spawnIndex = mazeSize.x * Random.Range(1, mazeSize.y -1);
+                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit.RemoveWall(3);
+
+                break;
+            case 3:
+                // right row
+                spawnIndex = mazeSize.x * Random.Range(1, mazeSize.y -1) + mazeSize.x-1;
+                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit.RemoveWall(2);
+                break;
+        }
     }
 }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class BallController : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         _timeRemaining = timeGiven;
+        transform.position = new Vector3(Random.Range(-3, 3), 10, Random.Range(-3, 3));
     }
 
     // Update is called once per frame

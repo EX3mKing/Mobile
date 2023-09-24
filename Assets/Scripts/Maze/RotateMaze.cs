@@ -33,7 +33,6 @@ public class RotateMaze : MonoBehaviour
         float rotY = transform.rotation.y;
 
         transform.eulerAngles = new Vector3(rotateZ, rotY, -rotateX);
-        
     }
     
 }
