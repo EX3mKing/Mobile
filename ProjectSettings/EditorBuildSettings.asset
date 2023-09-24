@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start.unity
-    guid: 712e84b29811ab74a89b182bb6e5f674
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: c850ee8c3b14cc8459e7e186857cf567
+    path: Assets/Scenes/Maze/Maze.unity
+    guid: 4d7d20dbb2e7f7047aa3be9f604066da
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 7ded9675701d10248a1c494fb30049f5, type: 2}
