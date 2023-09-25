@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RotateMaze : MonoBehaviour
 {
+    private int inverted = GlobalFunctions.Inverted; // 1 = normal, -1 = inverted
     public float rotateSpeed;
     public float maxRotation;
     public GameObject ball;
@@ -16,6 +17,7 @@ public class RotateMaze : MonoBehaviour
     {
         _mouseClick = Input.GetMouseButton(0);
         if (Input.GetMouseButtonDown(0)) ball.transform.Rotate(Vector3.up, 0.01f);
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)) GlobalFunctions.LoadSceneByIndex(0);
     }
 
     void FixedUpdate()
@@ -28,8 +30,8 @@ public class RotateMaze : MonoBehaviour
         float rotateX = _mouseX * rotateSpeed;
         float rotateZ = _mouseY * rotateSpeed;
 
-        rotateX = Mathf.Clamp(rotateX, -maxRotation, maxRotation);
-        rotateZ = Mathf.Clamp(rotateZ, -maxRotation, maxRotation);
+        rotateX = Mathf.Clamp(rotateX * inverted, -maxRotation, maxRotation);
+        rotateZ = Mathf.Clamp(rotateZ * inverted, -maxRotation, maxRotation);
         float rotY = transform.rotation.y;
 
         transform.eulerAngles = new Vector3(rotateZ, rotY, -rotateX);

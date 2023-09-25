@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GlobalFunctions: MonoBehaviour
 {
+    public static int Inverted = 1; // 1 = normal, -1 = inverted
     public static void Quit()
     {
         Application.Quit();
@@ -53,5 +54,9 @@ public class GlobalFunctions: MonoBehaviour
 
         return color;
     }
-    
+
+    public static void InvertInput(bool shouldBeInverted)
+    {
+        Inverted = shouldBeInverted ? -1 : 1;
+    }
 }
