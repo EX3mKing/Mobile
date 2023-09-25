@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 /// <summary>
@@ -20,9 +22,20 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] float nodeSize;
     private List<MazeNode> _nodes;
 
+    [SerializeField] private Material wallMaterial;
+    [SerializeField] private Material floorMaterial;
+    [SerializeField] private Material ballMaterial;
+
+
     private void Start()
     {
         _nodes = new List<MazeNode>();
+        
+        wallMaterial.color = GlobalFunctions.GetColor();
+        floorMaterial.color = GlobalFunctions.GetColor();
+        ballMaterial.color = GlobalFunctions.GetColor();
+        if (Camera.main != null) Camera.main.backgroundColor = new Color(Random.Range(0.7f, 1f), Random.Range(0.7f, 1f), Random.Range(0.7f, 1f));
+
         GenerateMazeInstant(mazeSize);
         //StartCoroutine(GenerateMaze(mazeSize));
         CreateExit();
@@ -132,7 +145,6 @@ public class MazeGenerator : MonoBehaviour
             else
             {
                 completedNodes.Add(currentPath[currentPath.Count - 1]);
-
                 currentPath[currentPath.Count - 1].SetState(NodeState.Completed);
                 currentPath.RemoveAt(currentPath.Count - 1);
             }
@@ -151,7 +163,6 @@ public class MazeGenerator : MonoBehaviour
                 Vector3 nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
                 MazeNode newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
                 nodes.Add(newNode);
-
                 yield return null;
             }
         }
@@ -261,31 +272,33 @@ public class MazeGenerator : MonoBehaviour
 
         int spawnIndex = 0;
         MazeNode exit;
+        
+        // nadodaj +1 na sve caseove jer je index 0 lopta
         switch (Random.Range(0,4))
         {
             case 0:
                 // bottom row
                 spawnIndex = mazeSize.x * mazeSize.y - Random.Range(1, mazeSize.x - 2);
-                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit = transform.GetChild(spawnIndex+1).GetComponent<MazeNode>();
                 exit.RemoveWall(0);
                 break;
             case 1:
                 // top row
                 spawnIndex = Random.Range(1, mazeSize.x-2);
-                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit = transform.GetChild(spawnIndex+1).GetComponent<MazeNode>();
                 exit.RemoveWall(1);
                 break;
             case 2:
                 // left row
                 spawnIndex = mazeSize.x * Random.Range(1, mazeSize.y -1);
-                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit = transform.GetChild(spawnIndex+1).GetComponent<MazeNode>();
                 exit.RemoveWall(3);
 
                 break;
             case 3:
                 // right row
                 spawnIndex = mazeSize.x * Random.Range(1, mazeSize.y -1) + mazeSize.x-1;
-                exit = transform.GetChild(spawnIndex).GetComponent<MazeNode>();
+                exit = transform.GetChild(spawnIndex+1).GetComponent<MazeNode>();
                 exit.RemoveWall(2);
                 break;
         }

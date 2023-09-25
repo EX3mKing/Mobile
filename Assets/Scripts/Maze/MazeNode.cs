@@ -7,7 +7,6 @@ public enum NodeState
     Available,
     Current,
     Completed,
-    Exit
 }
 
 public class MazeNode : MonoBehaviour
@@ -25,16 +24,13 @@ public class MazeNode : MonoBehaviour
         switch (state)
         {
             case NodeState.Available:
-                floor.material.color = Color.white;
+                //floor.material.color = Color.white;
                 break;
             case NodeState.Current:
-                floor.material.color = Color.yellow;
+                //floor.material.color = Color.yellow;
                 break;
             case NodeState.Completed:
-                floor.material.color = Color.blue;
-                break;
-            case NodeState.Exit:
-                floor.gameObject.SetActive(false);
+                //floor.material.color = Color.blue;
                 break;
         }
     }

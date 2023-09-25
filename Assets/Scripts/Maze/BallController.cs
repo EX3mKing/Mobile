@@ -27,7 +27,7 @@ public class BallController : MonoBehaviour
         if (transform.position.y < -30)
         {
             //fadePanel.SetBool("Fade",true);
-            StartCoroutine(GlobalFunctions.LoadSceneByIndex(0, 2f));
+            StartCoroutine(GlobalFunctions.LoadSceneByIndex(1, 2f));
         }
 
         if (_timeRemaining > 0)
@@ -41,7 +41,7 @@ public class BallController : MonoBehaviour
         else
         {
             //fadePanel.SetBool("Lost",true);
-            StartCoroutine(GlobalFunctions.LoadSceneByIndex(0, 2f));
+            StartCoroutine(GlobalFunctions.LoadSceneByIndex(1, 2f));
         }
     }
 }
